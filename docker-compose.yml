@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  slave_testX:
+    build: ./services/AUTOMATIC1111
+    image: nqrt-sd:auto1111-dev
+    container_name: nqrt_auto_slave_testX
+    environment:
+      - CLI_ARGS=--allow-code --medvram --xformers --enable-insecure-extension-access --api
+    ports:
+      - "7870:7860"
+    volumes:
+      - &v1 ./data:/data
+      - &v2 ./output:/output
+    stop_signal: SIGINT
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ '0' ]
+              capabilities: [ compute, utility ]
