@@ -41,7 +41,7 @@ RUN --mount=type=cache,target=/cache --mount=type=cache,target=/root/.cache/pip 
 
 RUN mkdir -p /stable-diffusion-webui
 COPY ../* /stable-diffusion-webui
-RUN cd /stable-diffusion-webui && pip install -r requirements_versions.txt
+RUN cd /stable-diffusion-webui && pip install -r /stable-diffusion-webui/requirements_versions.txt
 
 #RUN --mount=type=cache,target=/root/.cache/pip \
 #  git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git && \
