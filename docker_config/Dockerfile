@@ -39,13 +39,16 @@ RUN --mount=type=cache,target=/cache --mount=type=cache,target=/root/.cache/pip 
   https://download.pytorch.org/whl/cu118/torch-2.0.1%2Bcu118-cp310-cp310-linux_x86_64.whl && \
   pip install /cache/torch-2.0.1-cp310-cp310-linux_x86_64.whl torchvision --index-url https://download.pytorch.org/whl/cu118
 
+COPY ../* /stable-diffusion-webui
+RUN cd stable-diffusion-webui
+RUN reset --hard 20ae71faa8ef035c31aa3a410b707d792c8203a3
+RUN pip install -r requirements_versions.txt
 
-
-RUN --mount=type=cache,target=/root/.cache/pip \
-  git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git && \
-  cd stable-diffusion-webui && \
-  git reset --hard 20ae71faa8ef035c31aa3a410b707d792c8203a3 && \
-  pip install -r requirements_versions.txt
+#RUN --mount=type=cache,target=/root/.cache/pip \
+#  git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git && \
+#  cd stable-diffusion-webui && \
+#  git reset --hard 20ae71faa8ef035c31aa3a410b707d792c8203a3 && \
+#  pip install -r requirements_versions.txt
 
 RUN --mount=type=cache,target=/root/.cache/pip  \
   --mount=type=bind,from=xformers,source=/wheel.whl,target=/xformers-0.0.21.dev544-cp310-cp310-manylinux2014_x86_64.whl \
