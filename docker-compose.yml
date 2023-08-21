@@ -3,8 +3,8 @@ version: '3.9'
 services:
   slave_testX:
     build: ./docker_config
-    image: nqrt-sd:auto1111-dev
-    container_name: nqrt_auto_slave_testX
+    image: nqrt-sd:nqrt_auto11X
+    container_name: nqrt_auto11X
     environment:
       - CLI_ARGS=--allow-code --medvram --xformers --enable-insecure-extension-access --api
     ports:
