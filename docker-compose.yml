@@ -12,6 +12,7 @@ services:
     volumes:
       - &v1 ./data:/data
       - &v2 ./output:/output
+      - &v3 ./:/stable-diffusion-webui
     stop_signal: SIGINT
     deploy:
       resources:
