@@ -42,7 +42,7 @@ RUN --mount=type=cache,target=/cache --mount=type=cache,target=/root/.cache/pip 
 RUN mkdir -p /stable-diffusion-webui
 COPY ../* /stable-diffusion-webui
 RUN cd /stable-diffusion-webui
-RUN reset --hard 20ae71faa8ef035c31aa3a410b707d792c8203a3
+#RUN reset --hard 20ae71faa8ef035c31aa3a410b707d792c8203a3
 RUN pip install -r requirements_versions.txt
 
 #RUN --mount=type=cache,target=/root/.cache/pip \
