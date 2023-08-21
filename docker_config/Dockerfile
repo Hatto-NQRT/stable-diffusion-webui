@@ -82,7 +82,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
   git reset --hard ${SHA} && \
   pip install -r requirements_versions.txt
 
-COPY ./docker_config /docker
 
 RUN \
   python3 /docker/info.py ${ROOT}/modules/ui.py && \
