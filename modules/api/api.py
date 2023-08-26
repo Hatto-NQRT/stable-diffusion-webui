@@ -198,6 +198,7 @@ class Api:
         self.add_api_route("/sdapi/v1/embeddings", self.get_embeddings, methods=["GET"], response_model=models.EmbeddingsResponse)
         self.add_api_route("/sdapi/v1/refresh-checkpoints", self.refresh_checkpoints, methods=["POST"])
         self.add_api_route("/sdapi/v1/create/embedding", self.create_embedding, methods=["POST"], response_model=models.CreateResponse)
+        self.add_api_route("/sdapi/v1/replace/embedding-dir", self.replace_embedding_dir, methods=["POST"], response_model=models.CreateResponse)
         self.add_api_route("/sdapi/v1/create/hypernetwork", self.create_hypernetwork, methods=["POST"], response_model=models.CreateResponse)
         self.add_api_route("/sdapi/v1/preprocess", self.preprocess, methods=["POST"], response_model=models.PreprocessResponse)
         self.add_api_route("/sdapi/v1/train/embedding", self.train_embedding, methods=["POST"], response_model=models.TrainResponse)
@@ -619,6 +620,9 @@ class Api:
         finally:
             shared.state.end()
 
+    def replace_embedding_dir(self, args: dict):
+        sd_hijack.model_hijack.embedding_db.clear_embedding_dirs()
+        sd_hijack.model_hijack.embedding_db.add_embedding_dir(args['path'])
 
     def create_hypernetwork(self, args: dict):
         try:
